@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用shell脚本部署jar包到linux服务器 | 徵羽千夜的开发者日志</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="徵羽千夜的开发者日志">
+    <meta name="keywords" content="RushB，徵羽千夜，博客">
+    <meta name="author" content="flamingo">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/assets/css/0.styles.06853840.css" as="style"><link rel="preload" href="/assets/js/app.eaa4485d.js" as="script"><link rel="preload" href="/assets/js/2.53a06445.js" as="script"><link rel="preload" href="/assets/js/20.c13883e7.js" as="script"><link rel="preload" href="/assets/js/3.9be4e1d5.js" as="script"><link rel="prefetch" href="/assets/js/10.7b2a41a0.js"><link rel="prefetch" href="/assets/js/11.e8c6b06f.js"><link rel="prefetch" href="/assets/js/12.5d6b7855.js"><link rel="prefetch" href="/assets/js/13.0df7b40b.js"><link rel="prefetch" href="/assets/js/14.5abd49d1.js"><link rel="prefetch" href="/assets/js/15.903afe06.js"><link rel="prefetch" href="/assets/js/16.71bcd2bb.js"><link rel="prefetch" href="/assets/js/17.1b6c59a6.js"><link rel="prefetch" href="/assets/js/18.5e7bffd3.js"><link rel="prefetch" href="/assets/js/19.ae3d81e6.js"><link rel="prefetch" href="/assets/js/21.30401151.js"><link rel="prefetch" href="/assets/js/22.77638dac.js"><link rel="prefetch" href="/assets/js/23.e1554a7f.js"><link rel="prefetch" href="/assets/js/24.b1f48863.js"><link rel="prefetch" href="/assets/js/25.f940fd18.js"><link rel="prefetch" href="/assets/js/26.6b5234e4.js"><link rel="prefetch" href="/assets/js/27.dbc72dee.js"><link rel="prefetch" href="/assets/js/28.48978654.js"><link rel="prefetch" href="/assets/js/29.f2d168ee.js"><link rel="prefetch" href="/assets/js/30.5a084f19.js"><link rel="prefetch" href="/assets/js/4.b5dc6004.js"><link rel="prefetch" href="/assets/js/5.ecc16a84.js"><link rel="prefetch" href="/assets/js/6.677491ba.js"><link rel="prefetch" href="/assets/js/7.4876986a.js"><link rel="prefetch" href="/assets/js/8.b8197eca.js"><link rel="prefetch" href="/assets/js/9.5176d815.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.06853840.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/img/hero.png" alt="徵羽千夜的开发者日志" class="logo"> <span class="site-name can-hide">徵羽千夜的开发者日志</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">
+  博客
+</a></div><div class="nav-item"><a href="/leetcode/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/flamingoodev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">
+  博客
+</a></div><div class="nav-item"><a href="/leetcode/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/flamingoodev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="使用shell脚本部署jar包到linux服务器"><a href="#使用shell脚本部署jar包到linux服务器" class="header-anchor">#</a> 使用shell脚本部署jar包到linux服务器</h1> <h2 id="脚本说明"><a href="#脚本说明" class="header-anchor">#</a> 脚本说明</h2> <p>这里我们把前端项目打包到spring boot应用的static目录中，而不是选用nginx发布前端。可根据项目实际情况来修改此脚本。
+因为本人当前使用项目基本上都是通过jar包的方式发布，考虑到方便发布、降低打包的容错率、提高部署速度、减少宕机时间等因素，
+故使用shell脚本一键部署。 业界更好的做法是使用DevOps等工具对项目进行全生命周期的管理，这部分内容暂不在本文讨论范围内。<br>
+上传和部署均设置了5s的延时，可以随时键入Ctrl+C中断脚本运行。</p> <p><strong>注意</strong></p> <ol><li>如果想要更进一步减少宕机时间，可使用软连接的方式链接jar包以节省拷贝jar包的带来的时间损耗。</li> <li>登录服务器后的提示符如果不是<code>#</code>，则需要修改脚本进行适配。</li></ol> <h2 id="部署目录结构"><a href="#部署目录结构" class="header-anchor">#</a> 部署目录结构</h2> <p>为了方便项目服务管理，软链接<code>intellect-chart.service</code>文件到Linux系统服务下，利用Linux系统服务来管理我们的应用。
+可参考上篇博文进行Linux服务的创建。upload路径是脚本上传编译产物的路径，每次上传都会覆盖之前的文件。每次运行脚本都会在backup目录下进行备份。</p> <p><strong>注意</strong></p> <ol><li>backup和upload路径需要手动创建。</li> <li>若项目发布失败需要手动恢复备份。</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>├── backup
+│   └── warning-chart_202112171752.jar
+├── intellect-chart.service
+├── intellect-chart-v1.0.0.jar
+├── logs
+│   └── 2021-12-17
+│       └── 2021-12-17.log
+└── upload
+    └── intellect-chart-v1.0.0.jar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="依赖命令"><a href="#依赖命令" class="header-anchor">#</a> 依赖命令</h2> <p><code>ssh</code> <code>git</code> <code>yarn/npm</code> <code>mvn</code> <code>expect</code></p> <h2 id="shell脚本"><a href="#shell脚本" class="header-anchor">#</a> shell脚本</h2> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token builtin class-name">set</span> -e
+
+<span class="token comment"># workdir</span>
+<span class="token assign-left variable">work_path</span><span class="token operator">=</span><span class="token string">&quot;/Users/xxx/Files/Build/lanxi&quot;</span>
+<span class="token assign-left variable">frontend_path</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$work_path</span>/liwinon-intelligent-chart&quot;</span>
+<span class="token assign-left variable">backend_path</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$work_path</span>/intellect-chart&quot;</span>
+
+<span class="token comment"># git</span>
+<span class="token assign-left variable">frontend_branch</span><span class="token operator">=</span><span class="token string">&quot;master&quot;</span>
+<span class="token assign-left variable">backend_branch</span><span class="token operator">=</span><span class="token string">&quot;master&quot;</span>
+
+<span class="token comment"># target</span>
+<span class="token assign-left variable">target_name</span><span class="token operator">=</span><span class="token string">&quot;intellect-chart-v1.0.0.jar&quot;</span>
+<span class="token assign-left variable">target</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$backend_path</span>/target/<span class="token variable">$target_name</span>&quot;</span>
+
+<span class="token comment"># ssh</span>
+<span class="token assign-left variable">host</span><span class="token operator">=</span><span class="token string">&quot;192.168.0.1&quot;</span>
+<span class="token assign-left variable">username</span><span class="token operator">=</span><span class="token string">&quot;root&quot;</span>
+<span class="token assign-left variable">password</span><span class="token operator">=</span><span class="token string">&quot;password&quot;</span>
+<span class="token assign-left variable">host_work_path</span><span class="token operator">=</span><span class="token string">&quot;/root/intellect-chart/&quot;</span>
+<span class="token assign-left variable">upload_path</span><span class="token operator">=</span><span class="token string">&quot;/root/intellect-chart/upload/&quot;</span>
+<span class="token assign-left variable">backup_path</span><span class="token operator">=</span><span class="token string">&quot;/root/intellect-chart/backup/&quot;</span>
+<span class="token assign-left variable">backup_prefix</span><span class="token operator">=</span><span class="token string">&quot;intellect-chart&quot;</span>
+
+<span class="token comment"># run</span>
+<span class="token assign-left variable">port</span><span class="token operator">=</span><span class="token string">&quot;8080&quot;</span>
+<span class="token assign-left variable">run_cmd</span><span class="token operator">=</span><span class="token string">&quot;systemctl restart intellect-chart&quot;</span>
+
+
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Processing frontend build...&quot;</span>
+<span class="token builtin class-name">cd</span> <span class="token string">&quot;<span class="token variable">$frontend_path</span>&quot;</span>
+<span class="token function">git</span> checkout <span class="token string">&quot;<span class="token variable">$frontend_branch</span>&quot;</span>
+<span class="token function">git</span> pull
+<span class="token comment"># yarn install</span>
+<span class="token function">yarn</span> run build
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Cleaning the old frontend dist files...&quot;</span>
+<span class="token function">rm</span> -r -f <span class="token string">&quot;<span class="token variable">$backend_path</span>&quot;</span>/src/main/resources/static/*
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Copying new dist files to static path...&quot;</span>
+<span class="token function">cp</span> -rf dist/* <span class="token string">&quot;<span class="token variable">$backend_path</span>&quot;</span>/src/main/resources/static/
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Processing backend build...&quot;</span>
+<span class="token builtin class-name">cd</span> <span class="token string">&quot;<span class="token variable">$backend_path</span>&quot;</span>
+<span class="token function">git</span> checkout <span class="token string">&quot;<span class="token variable">$backend_branch</span>&quot;</span>
+<span class="token function">git</span> pull
+mvn clean compile package -DskipTests -Dfile.encoding<span class="token operator">=</span>UTF-8
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🍺 Build successfully!&quot;</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">..</span><span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">printf</span> <span class="token string">&quot;<span class="token entity" title="\r">\r</span><span class="token entity" title="\033">\033</span>[33m ⚠️  Will be uploaded to the 「%s」 server in %s seconds, type <span class="token entity" title="\&quot;">\&quot;</span>Ctrl + C<span class="token entity" title="\&quot;">\&quot;</span> to abort! <span class="token entity" title="\033">\033</span>[0m&quot;</span> <span class="token string">&quot;<span class="token variable">$host</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$i</span>&quot;</span><span class="token punctuation">;</span>
+  <span class="token function">sleep</span> <span class="token number">1</span>
+<span class="token keyword">done</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Processing the building target to upload...&quot;</span>
+<span class="token builtin class-name">cd</span> <span class="token string">&quot;<span class="token variable">$backend_path</span>&quot;</span>
+<span class="token function">expect</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+spawn scp <span class="token variable">$target</span> <span class="token variable">$username</span>@<span class="token variable">$host</span>:<span class="token variable">$upload_path</span>
+expect &quot;*password:&quot;
+send <span class="token variable">$password</span><span class="token entity" title="\r">\r</span>
+expect eof
+EOF</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🍺 Upload successfully!&quot;</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">..</span><span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">printf</span> <span class="token string">&quot;<span class="token entity" title="\r">\r</span><span class="token entity" title="\033">\033</span>[33m ⚠️  Will be deployed to the 「%s」 server in %s seconds, type <span class="token entity" title="\&quot;">\&quot;</span>Ctrl + C<span class="token entity" title="\&quot;">\&quot;</span> to abort! <span class="token entity" title="\033">\033</span>[0m&quot;</span> <span class="token string">&quot;<span class="token variable">$host</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$i</span>&quot;</span><span class="token punctuation">;</span>
+  <span class="token function">sleep</span> <span class="token number">1</span>
+<span class="token keyword">done</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🦀️ Processing the building target to deploy...&quot;</span>
+<span class="token assign-left variable">backup_file_name</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$backup_prefix_</span><span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> <span class="token string">&quot;+%Y%m%d%H%M&quot;</span><span class="token variable">)</span></span>.jar&quot;</span>
+<span class="token builtin class-name">cd</span> <span class="token string">&quot;<span class="token variable">$work_path</span>&quot;</span>
+<span class="token function">expect</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+    set timeout 30
+
+    spawn ssh <span class="token variable">$username</span>@<span class="token variable">$host</span>
+    expect &quot;*password:&quot;
+    send <span class="token variable">$password</span><span class="token entity" title="\r">\r</span>
+
+    expect  &quot;#&quot; {
+      # backup the old jar file to backup path
+      send &quot;cd <span class="token variable">$host_work_path</span><span class="token entity" title="\r">\r</span>&quot;
+      send &quot;mv <span class="token variable">$target_name</span> <span class="token variable">$backup_path</span><span class="token variable">$backup_file_name</span><span class="token entity" title="\r">\r</span>&quot;
+      # copy the target from upload path
+      send &quot;cp -rf ./upload/<span class="token variable">$target_name</span> .<span class="token entity" title="\r">\r</span>&quot;
+      # restart service
+      send &quot;<span class="token variable">$run_cmd</span><span class="token entity" title="\r">\r</span>&quot; }
+
+    send &quot;exit<span class="token entity" title="\r">\r</span>&quot;
+    expect eof
+EOF</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;🍺 Deploy successfully!&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;          App running at: http://<span class="token variable">$host</span>:<span class="token variable">$port</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;          The service restart might take a while...&quot;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2 years ago</span></div></footer> <!----> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.eaa4485d.js" defer></script><script src="/assets/js/2.53a06445.js" defer></script><script src="/assets/js/20.c13883e7.js" defer></script><script src="/assets/js/3.9be4e1d5.js" defer></script>
+  </body>
+</html>

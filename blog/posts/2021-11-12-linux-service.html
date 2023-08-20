@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>在linux服务器上使用Linux Service部署java服务或其他服务 | 徵羽千夜的开发者日志</title>
+    <meta name="generator" content="VuePress 1.5.4">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="徵羽千夜的开发者日志">
+    <meta name="keywords" content="RushB，徵羽千夜，博客">
+    <meta name="author" content="flamingo">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/assets/css/0.styles.06853840.css" as="style"><link rel="preload" href="/assets/js/app.eaa4485d.js" as="script"><link rel="preload" href="/assets/js/2.53a06445.js" as="script"><link rel="preload" href="/assets/js/19.ae3d81e6.js" as="script"><link rel="preload" href="/assets/js/3.9be4e1d5.js" as="script"><link rel="prefetch" href="/assets/js/10.7b2a41a0.js"><link rel="prefetch" href="/assets/js/11.e8c6b06f.js"><link rel="prefetch" href="/assets/js/12.5d6b7855.js"><link rel="prefetch" href="/assets/js/13.0df7b40b.js"><link rel="prefetch" href="/assets/js/14.5abd49d1.js"><link rel="prefetch" href="/assets/js/15.903afe06.js"><link rel="prefetch" href="/assets/js/16.71bcd2bb.js"><link rel="prefetch" href="/assets/js/17.1b6c59a6.js"><link rel="prefetch" href="/assets/js/18.5e7bffd3.js"><link rel="prefetch" href="/assets/js/20.c13883e7.js"><link rel="prefetch" href="/assets/js/21.30401151.js"><link rel="prefetch" href="/assets/js/22.77638dac.js"><link rel="prefetch" href="/assets/js/23.e1554a7f.js"><link rel="prefetch" href="/assets/js/24.b1f48863.js"><link rel="prefetch" href="/assets/js/25.f940fd18.js"><link rel="prefetch" href="/assets/js/26.6b5234e4.js"><link rel="prefetch" href="/assets/js/27.dbc72dee.js"><link rel="prefetch" href="/assets/js/28.48978654.js"><link rel="prefetch" href="/assets/js/29.f2d168ee.js"><link rel="prefetch" href="/assets/js/30.5a084f19.js"><link rel="prefetch" href="/assets/js/4.b5dc6004.js"><link rel="prefetch" href="/assets/js/5.ecc16a84.js"><link rel="prefetch" href="/assets/js/6.677491ba.js"><link rel="prefetch" href="/assets/js/7.4876986a.js"><link rel="prefetch" href="/assets/js/8.b8197eca.js"><link rel="prefetch" href="/assets/js/9.5176d815.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.06853840.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/assets/img/hero.png" alt="徵羽千夜的开发者日志" class="logo"> <span class="site-name can-hide">徵羽千夜的开发者日志</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">
+  博客
+</a></div><div class="nav-item"><a href="/leetcode/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/flamingoodev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">
+  博客
+</a></div><div class="nav-item"><a href="/leetcode/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/flamingoodev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="在linux服务器上使用linux-service部署java服务或其他服务"><a href="#在linux服务器上使用linux-service部署java服务或其他服务" class="header-anchor">#</a> 在linux服务器上使用Linux Service部署java服务或其他服务</h1> <p>我们以部署一个名为<code>intellect-chart-v1.0.0.jar</code>的Java Spring Boot项目为例，
+来演示如何创建一个Linux服务。演示的服务器为一台x86_64架构的Centos8系统，
+此处我们使用<code>root</code>用户，实际应尽量避免使用<code>root</code>用户去操作linux系统！</p> <h2 id="安装步骤如下"><a href="#安装步骤如下" class="header-anchor">#</a> 安装步骤如下：</h2> <h3 id="_1-在用户目录下创建应用程序目录"><a href="#_1-在用户目录下创建应用程序目录" class="header-anchor">#</a> 1. 在用户目录下创建应用程序目录</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> ~
+<span class="token function">mkdir</span> intellect-chart
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_2-创建service文件"><a href="#_2-创建service文件" class="header-anchor">#</a> 2. 创建service文件</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /root/intellect-chart
+<span class="token function">vim</span> intellect-chart.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>intellect-chart.service内容如下：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>java intellect-chart server
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/java -jar /root/intellect-chart/intellect-chart-v1.0.0.jar
+<span class="token assign-left variable">Restart</span><span class="token operator">=</span>always
+<span class="token assign-left variable">Environment</span><span class="token operator">=</span><span class="token environment constant">PATH</span><span class="token operator">=</span>/usr/bin:/usr/local/bin
+<span class="token assign-left variable">WorkingDirectory</span><span class="token operator">=</span>/root/intellect-chart
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>此处只介绍本服务用到的基础属性，更多Service文件配置属性请自行Google</p> <p><strong>[Unit] 定义该服务作为Unit角色时相关的属性</strong></p> <p>Description 属性是指服务的描述，使用<code>systemctl status intellect-chart</code>查看服务信息时，该描述将显示在第一行<br>
+可以使用 <code>Wants、Requires、After、Before</code>等属性来定义本服务的依赖关系和启动顺序等行为</p> <p><strong>[Service] 定义服务自身相关的属性</strong></p> <p>ExecStart 属性后跟服务的启动命令，例如我们的java服务使用java -jar命令启动<br>
+Restart 顾名思义，服务重启相关配置<br>
+Environment 服务使用到的环境变量配置<br>
+WorkingDirectory 服务的工作目录</p> <p><strong>[Install] 定义服务在设置开机自启时相关的属性</strong></p> <p>WantedBy=multi-user.target 本服务设置开机自启动时，将在/etc/systemd/multi-user.target.wants目录下创建本服务的软链接。</p> <h3 id="_3-建立软连接到-etc-systemd-system"><a href="#_3-建立软连接到-etc-systemd-system" class="header-anchor">#</a> 3. 建立软连接到 <code>/etc/systemd/system</code></h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">ln</span> -s /root/intellect-chart/intellect-chart.service /etc/systemd/system/intellect-chart.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="_4-重载系统服务"><a href="#_4-重载系统服务" class="header-anchor">#</a> 4. 重载系统服务</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>systemctl daemon-reload
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="_5-启动服务"><a href="#_5-启动服务" class="header-anchor">#</a> 5. 启动服务</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>systemctl start intellect-chart.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>至此Linux服务安装完成，后续可使用<code>systemctl</code>或者<code>service</code>命令来启动、停止、重启该服务。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2 years ago</span></div></footer> <!----> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.eaa4485d.js" defer></script><script src="/assets/js/2.53a06445.js" defer></script><script src="/assets/js/19.ae3d81e6.js" defer></script><script src="/assets/js/3.9be4e1d5.js" defer></script>
+  </body>
+</html>
